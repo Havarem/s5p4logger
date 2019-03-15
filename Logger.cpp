@@ -5,42 +5,44 @@
 #include "Logger.h"
 
 void
-Logger::logEvent(LogLevel level, const char * message)
+Logger::logEvent(LogLevel level, const char * module, const char * message)
 {
     char result[6];
 
-    switch(level)
-    {
-    case Debug:
-    {
-        strcpy(result, LOG_DEBUG_TITLE);
-        break;
+    if (level >= Logger::level) {
+        switch(level)
+        {
+        case Debug:
+        {
+            strcpy(result, LOG_DEBUG_TITLE);
+            break;
+        }
+
+        case Info:
+        {
+            strcpy(result, LOG_INFO_TITLE);
+            break;
+        }
+
+        case Warning:
+        {
+            strcpy(result, LOG_WARNING_TITLE);
+            break;
+        }
+
+        case Error:
+        {
+            strcpy(result, LOG_ERROR_TITLE);
+            break;
+        }
+        }
     }
 
-    case Info:
-    {
-        strcpy(result, LOG_INFO_TITLE);
-        break;
-    }
-
-    case Warning:
-    {
-        strcpy(result, LOG_WARNING_TITLE);
-        break;
-    }
-
-    case Error:
-    {
-        strcpy(result, LOG_ERROR_TITLE);
-        break;
-    }
-    }
-
-    printf("[%s] %s\r\n", result, message);
+    printf("[%s] %s - %s\r\n", module, result, message);
 }
 
 void
-Logger::logDebug(const char * message, ...)
+Logger::logDebug(const char * module, const char * message, ...)
 {
     va_list arg;
     va_start(arg, message);
@@ -50,11 +52,11 @@ Logger::logDebug(const char * message, ...)
 
     va_end(arg);
 
-    logEvent(LogLevel::Debug, buffer);
+    logEvent(LogLevel::Debug, module, buffer);
 }
 
 void
-Logger::logInfo(const char * message, ...)
+Logger::logInfo(const char * module, const char * message, ...)
 {
     va_list arg;
     va_start(arg, message);
@@ -64,11 +66,11 @@ Logger::logInfo(const char * message, ...)
 
     va_end(arg);
 
-    logEvent(LogLevel::Info, buffer);
+    logEvent(LogLevel::Info, module, buffer);
 }
 
 void
-Logger::logWarning(const char * message, ...)
+Logger::logWarning(const char * module, const char * message, ...)
 {
     va_list arg;
     va_start(arg, message);
@@ -78,11 +80,11 @@ Logger::logWarning(const char * message, ...)
 
     va_end(arg);
 
-    logEvent(LogLevel::Warning, buffer);
+    logEvent(LogLevel::Warning, module, buffer);
 }
 
 void
-Logger::logError(const char * message, ...)
+Logger::logError(const char * module, const char * message, ...)
 {
     va_list arg;
     va_start(arg, message);
@@ -92,5 +94,5 @@ Logger::logError(const char * message, ...)
 
     va_end(arg);
 
-    logEvent(LogLevel::Error, buffer);
+    logEvent(LogLevel::Error, module, buffer);
 }

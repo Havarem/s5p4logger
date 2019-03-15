@@ -32,6 +32,8 @@ class Logger {
 public:
     /**
      *  The only way to access the class since it is a singleton.
+     *
+     *  @return A Logger reference (the only one instantiated)
      */
     static Logger &getLogger()
     {
@@ -41,24 +43,39 @@ public:
     }
 
     /**
-     *  Log a debug event,
+     *  Log a debug event.
+     *
+     *  @param char const * The module name string
+     *  @param char const * The message
      */
-    void logDebug(char const *, ...);
+    void logDebug(char const *, char const *, ...);
 
     /**
      *  Log an information event.
+     *
+     *  @param char const * The module name string
+     *  @param char const * The message
      */
-    void logInfo(char const *, ...);
+    void logInfo(char const *, char const *, ...);
 
     /**
      *  Log a warning event.
+     *
+     *  @param char const * The module name string
+     *  @param char const * The message
      */
-    void logWarning(char const *, ...);
+    void logWarning(char const *, char const *, ...);
 
     /**
      *  Log an error event.
+     *
+     *  @param char const * The module name string
+     *  @param char const * The message
      */
-    void logError(char const *, ...);
+    void logError(char const *, char const *, ...);
+    
+    // This filters the event lower to this level
+    static LogLevel level;
 private:
     /**
      *  Constructor (private because is a singleton)
@@ -76,9 +93,13 @@ private:
     Logger& operator=(Logger const &) {};
 
     /**
-     *  Log an event
+     *  Log an event.
+     *
+     *  @param LogLevel The log level
+     *  @param char const * The module name string
+     *  @param char const * The message
      */
-    void logEvent(LogLevel, char const *);
+    void logEvent(LogLevel, char const *, char const *);
 };
 
 
