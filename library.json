@@ -1,0 +1,10 @@
+{
+  "name": "LoggerUdeS",
+  "version": "0.1.0",
+  "keywords": "C++, Logger, Debug",
+  "description": "Simple C++ Logger for Embedded Project",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Havarem/s5p4logger.git"
+  }
+}
