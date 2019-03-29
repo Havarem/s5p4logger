@@ -1,6 +1,6 @@
 {
   "name": "LoggerUdeS",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": "C++, Logger, Debug",
   "description": "Simple C++ Logger for Embedded Project",
   "repository": {
