@@ -4,12 +4,14 @@
 
 #include "Logger.h"
 
+LogLevel Logger::level = Debug;
+
 void
-Logger::logEvent(LogLevel level, const char * module, const char * message)
+Logger::logEvent(LogLevel _level, const char * module, const char * message)
 {
     char result[6];
 
-    if (level >= Logger::level) {
+    if (_level >= level) {
         switch(level)
         {
         case Debug:
@@ -52,7 +54,7 @@ Logger::logDebug(const char * module, const char * message, ...)
 
     va_end(arg);
 
-    logEvent(LogLevel::Debug, module, buffer);
+    logEvent(Debug, module, buffer);
 }
 
 void
@@ -66,7 +68,7 @@ Logger::logInfo(const char * module, const char * message, ...)
 
     va_end(arg);
 
-    logEvent(LogLevel::Info, module, buffer);
+    logEvent(Info, module, buffer);
 }
 
 void
@@ -80,7 +82,7 @@ Logger::logWarning(const char * module, const char * message, ...)
 
     va_end(arg);
 
-    logEvent(LogLevel::Warning, module, buffer);
+    logEvent(Warning, module, buffer);
 }
 
 void
@@ -94,5 +96,5 @@ Logger::logError(const char * module, const char * message, ...)
 
     va_end(arg);
 
-    logEvent(LogLevel::Error, module, buffer);
+    logEvent(Error, module, buffer);
 }

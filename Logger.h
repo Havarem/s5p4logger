@@ -30,6 +30,9 @@ typedef enum LogLevel
 
 class Logger {
 public:
+    // This filters the event lower to this level
+    static LogLevel level;
+
     /**
      *  The only way to access the class since it is a singleton.
      *
@@ -73,9 +76,6 @@ public:
      *  @param char const * The message
      */
     void logError(char const *, char const *, ...);
-    
-    // This filters the event lower to this level
-    static LogLevel level;
 private:
     /**
      *  Constructor (private because is a singleton)
